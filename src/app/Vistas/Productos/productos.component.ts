@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Productos} from '../../Clases/productos';
 import {Categorias} from '../../Clases/categorias';
+import {CategoriaService} from '../../Servicios/categorias.service';
+
 import {Proveedores} from '../../Clases/proveedores';
+
+import {TipoProductores} from '../../Clases/tipoProductores';
+import {TipoProductoresService} from '../../Servicios/tipoProductores.service';
 
 import {ProductosService} from '../../Servicios/productos.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,38 +22,41 @@ export class ProductosComponent implements OnInit {
 
   productoObj: Productos[] = [];
   categoriaObj: Categorias[] = [];
-  proveedorObj: Proveedores[] = [];
+  categoriaFiltradoObj: Categorias[] = [];
+  tipoProductoresObj: TipoProductores[] = [];
 
-  //Nuevo
-  NewNombre:string;
-  NewStock:number=0;
-  NewPrecio:number=0;
-  NewFecha:Date;
-  NewEstado:boolean=false;
-  NewProveedor:number=0;
-  NewCategoria:number=0;
 
-  //Actualizar
-  UpdateNombre:string;
-  UpdateStock:number;
-  UpdatePrecio:number;
-  UpdateFecha;
-  UpdateEstado:boolean=false;
-  UpdateProveedor:number=0;
-  UpdateCategoria:number=0;
-  IDproducto:number;
+  tallaCheck:boolean = false;
   spinner:number=0;
 
-  constructor(private productosService:ProductosService, private modalService: NgbModal) { }
+  //NUEVO 
+  tipoProductorIdNew:number = 0;
+  categoriaIdNew:number = 0;
+
+  nombreNew:string;
+  unidadNew:string;
+  descripcionNew:string;
+  tallaNew:string = null;
+
+  //ACTUALIZAR
+  IDProducto:number = 0;
+  nombreUpdate:string;
+  unidadUpdate:string;
+  descripcionUpdate:string;
+  tallaUpdate:string = null;
+
+
+  
+
+  constructor(private productosService:ProductosService, private modalService: NgbModal, private tipoProductoresService:TipoProductoresService, private categoriaService:CategoriaService) { }
 
   ngOnInit(): void {
     this.mostrar();
+    this.llenarTipoProductores();
     this.llenarCategorias();
-    this.llenarProveedores();
   }
 
   mostrar() {
-    
     this.productosService.listarProductos().subscribe(res => {
       this.productoObj = res;
     }, error => alert("Error al listar Productos"));
@@ -56,132 +64,205 @@ export class ProductosComponent implements OnInit {
 
   llenarCategorias()
   {
-    this.productosService.listarCategorias().subscribe(res => {
+    this.categoriaService.listar().subscribe(res => {
       this.categoriaObj = res;
     }, error => alert("Error al listar Categorias"));
   }
 
-  llenarProveedores()
+  llenarTipoProductores()
   {
-
-    this.spinner=1;
-
-    
-    this.productosService.listarProveedores().subscribe(res => {
-      this.proveedorObj = res;
-      this.spinner=0;
-
-    }, error => {
-      alert("Error al conectar con el servidor");
-      this.spinner=0;
-    });
+    this.tipoProductoresService.listar().subscribe(res => {
+      this.tipoProductoresObj = res;
+    }, error =>alert("Error al listar los Tipos de Productores"));
   }
 
-
-  guardar()
+  filtrarCategorias()
   {
-    let dato:Productos ={
-      idProductos: undefined,
-      fechaIngreso: this.NewFecha,
-      stock: this.NewStock,
-      precio: this.NewPrecio,
-      estado: this.NewEstado,
-      proveedoresIdProveedores: parseInt(this.NewProveedor.toString()),
-      categoriasIdCategorias: parseInt(this.NewCategoria.toString()),
-      nombre: this.NewNombre
-    }
-    this.productosService.nuevoProducto(dato).subscribe(res => {
-      this.mostrar();
-    }, error => alert("Error al insertar el registro"));
-    this.limpiarNew();
-  }
-
-
-  llenarCampos(item:Productos)
-  {
-    this.UpdateFecha = this.obtenerFecha(item.fechaIngreso);
-    this.UpdateStock = item.stock;
-    this.UpdatePrecio = item.precio;
-    this.UpdateEstado = item.estado;
-    this.UpdateProveedor = item.proveedoresIdProveedores;
-    this.UpdateCategoria = item.categoriasIdCategorias;
-    this.UpdateNombre = item.nombre;
-    this.IDproducto = item.idProductos;
-  }
-
-
-  actualizarProducto()
-  {
-    let dato:Productos = {
-      idProductos: this.IDproducto,
-      fechaIngreso: this.UpdateFecha,
-      stock: this.UpdateStock,
-      precio: this.UpdatePrecio,
-      estado: this.UpdateEstado,
-      proveedoresIdProveedores: parseInt(this.UpdateProveedor.toString()),
-      categoriasIdCategorias: parseInt(this.UpdateCategoria.toString()),
-      nombre: this.UpdateNombre
-    }
-    console.log(dato);
-    this.productosService.editarProducto(this.IDproducto,dato).subscribe(res => {
-      this.mostrar();
-    }, error => alert("Error al actualizar el registro"));
-  }
-
-
-  eliminar(id)
-  {
-    Swal.fire({
-      title: '¿Esta seguro que desea eliminar?',
-      text: " este registro se eliminará permanentemente",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Aceptar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        this.productosService.eliminarProducto(id).subscribe(res => {
-          this.mostrar();
-          Swal.fire('Clientes', 'Registro Eliminado exitosamente ', 'success');
-        }, error => alert("error al eliminar el registro"));
+    this.tallaNew=null;
+    this.tallaUpdate=null;
+    this.categoriaIdNew = 0;
+    this.categoriaFiltradoObj = [];
+    for (let i of this.categoriaObj)
+    {
+      if(i.idTipoProductores == this.tipoProductorIdNew)
+      {
+        this.categoriaFiltradoObj.push(i);
       }
-    });
-
-  }
-
-
-
-
-
-
-
-
-  limpiarNew(){
-    this.NewFecha = undefined;
-    this.NewStock = 0;
-    this.NewPrecio = 0;
-    this.NewEstado = false;
-    this.NewProveedor = 0;
-    this.NewCategoria = 0;
-    this.NewNombre = '';
-  }
-
-
-
-
-
-  obtenerFecha(fecha:any)
-  {
-    let x = fecha.split("T",1);
-    return x[0];
-  }
-
-    //MODAL
-    openModal(content) {
-      this.modalService.open(content);
     }
+    this.comprobarTalla();
+  }
+
+
+  //funcion que activara o desactivara la casilla de texto de TALLA dependiodo si es TRUE O FALSE
+  comprobarTalla()
+  {
+    let x:TipoProductores;
+    for(let i of this.tipoProductoresObj)
+    {
+      if(i.idTipoProductores == this.tipoProductorIdNew)
+      {
+        x=i;
+      }
+    }
+    if(x.nombre == 'ARTESANO' || x.nombre == 'artesano' || x.nombre == 'ARTESANOS' || x.nombre == 'artesanos' || x.nombre == 'Artesanos' || x.nombre == 'Artesano'){
+      this.tallaCheck = true;
+    }
+    else{
+      this.tallaCheck = false;
+    }
+  }
+
+
+  async guardar(){
+    let objProd:Productos ={
+      idProductos:undefined,
+      nombreProducto : this.nombreNew,
+      unidad: this.unidadNew,
+      descripcion: this.descripcionNew,
+      talla : this.tallaNew,
+      idCategorias: this.categoriaIdNew
+    }
+    if(this.tallaCheck == true) //si el campo talla va vacio lanzar una alerta (PENDIENTE!)
+    {
+    await  this.productosService.nuevoProducto(objProd).subscribe(res => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Guardado con exito',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }, error => {console.log('Error al guardar')},
+      () =>{this.mostrar()}
+      )
+    }
+    else //El campo Talla deberia ir null sin lanzar ninguna alerta (PENDIENTE!)
+    {
+      objProd.talla = null;
+      this.productosService.nuevoProducto(objProd).subscribe(res => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Guardado con exito',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }, error => {console.log('Error al guardar')},
+      () =>{this.mostrar()}
+      )
+    }
+
+  }
+
+  llenarCampos(item:Productos){
+    console.log(this.categoriaObj);
+    
+    if(item.talla == null || item.talla == undefined){
+      this.tallaCheck = false;
+    }
+    else{
+      this.tallaCheck = true;
+    }
+    
+    let id_cat:number = item.idCategorias;
+    console.log(this.categoriaObj);
+    
+    for(let i of this.categoriaObj){
+      if(i.idCategorias == id_cat){
+        console.log(i);
+        this.tipoProductorIdNew = i.idTipoProductores;
+        break;
+      }
+    }
+    
+    this.filtrarCategorias();
+    this.categoriaIdNew = id_cat;
+
+    console.log(this.tipoProductorIdNew);
+    console.log(this.categoriaIdNew);
+
+
+    this.IDProducto = item.idProductos;
+    this.nombreUpdate = item.nombreProducto;
+    this.unidadUpdate = item.unidad;
+    this.descripcionUpdate = item.descripcion;
+    this.tallaUpdate = item.talla;
+  }
+
+
+  actualizarProd(){
+    let objProd:Productos ={
+      idProductos:this.IDProducto,
+      nombreProducto : this.nombreUpdate,
+      unidad: this.unidadUpdate,
+      descripcion: this.descripcionUpdate,
+      talla : this.tallaUpdate,
+      idCategorias: this.categoriaIdNew
+    }
+    if(this.tallaCheck == true) //si el campo talla va vacio lanzar una alerta (PENDIENTE!)
+    {
+      this.productosService.editarProducto(objProd.idProductos,objProd).subscribe(res => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Actualizacion exitosa',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }, error => {console.log('Error al actualizar')},
+      () =>{this.mostrar()}
+      )
+    }
+    else //El campo Talla deberia ir null sin lanzar ninguna alerta (PENDIENTE!)
+    {
+      objProd.talla = null;
+      this.productosService.editarProducto(objProd.idProductos,objProd).subscribe(res => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Actualizacion exitosa',
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }, error => {console.log('Error al actualizar')},
+      () =>{this.mostrar()}
+      )
+    }
+
+  }
+
+  limpiar(){
+    this.nombreNew = null;
+    this.unidadNew = null;
+    this.descripcionNew = null;
+    this.tallaNew = null;
+    this.tallaCheck = false;
+  }
+
+
+  elimiarProd(id:any){
+    this.productosService.eliminarProducto(id).subscribe(res => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Eliminacion exitosa',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    }, error => {console.log('Error al eliminar')},
+    () =>{this.mostrar()}
+    )
+  }
+
+  openModal(content) {
+    this.limpiar();
+    this.modalService.open(content);
+    this.tipoProductorIdNew = 0;
+    this.categoriaIdNew = 0;
+  }
 
 }
+
+
+
+  

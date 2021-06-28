@@ -1,13 +1,12 @@
 export interface Productos
 {
   idProductos: number;
-  fechaIngreso: Date;
-  stock: number;
-  precio: number;
-  estado: boolean,
-  proveedoresIdProveedores: number;
-  categoriasIdCategorias: number;
-  nombre: string;
+  nombreProducto : string;
+  unidad: string;
+
+  descripcion: string;
+  talla : string;
+  idCategorias  : number;
 }
 /*
 ARTESANOS

@@ -1,5 +1,7 @@
 export interface Categorias
 {
-  idCategorias:number,
-  detalle:string
+  idCategorias:number;
+  nombre:string;
+  descripcion:string;
+  idTipoProductores:number;
 }

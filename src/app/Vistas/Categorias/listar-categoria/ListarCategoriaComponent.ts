@@ -41,7 +41,7 @@ import Swal from 'sweetalert2';
   });
   }
 
-  guardar() {
+  /*guardar() {
     let datoCategoria: Categorias = {
       detalle: this.NewDetalleCategoria,
       idCategorias: undefined
@@ -50,24 +50,26 @@ import Swal from 'sweetalert2';
       this.mostrar();
       this.NewDetalleCategoria = "";
     }, error => alert("Error al insertar el registro"));
-  }
+  }*/
 
   cargar(item: Categorias) {
     this.IDCategoria = item.idCategorias;
-    this.UpdateDetalleCategoria = item.detalle;
+    //this.UpdateDetalleCategoria = item.detalle;
   }
 
-  editar() {
+  /*editar() {
     let datoCategoria: Categorias = {
-      detalle: this.UpdateDetalleCategoria,
+      //detalle: this.UpdateDetalleCategoria,
       idCategorias: this.IDCategoria
     };
     this.categoriaService.editar(this.IDCategoria, datoCategoria).subscribe(res => {
       this.mostrar();
       this.UpdateDetalleCategoria = "";
     }, error => alert("Error al insertar el registro"));
-  }
+  }*/
 
+
+  /*
   eliminar(id: any) {
     Swal.fire({
       title: '¿Esta seguro que desea eliminar?',
@@ -97,6 +99,6 @@ import Swal from 'sweetalert2';
   openModal(content) {
     this.modalService.open(content, { size: 'sm' });
   }
-
+*/
 
 }
