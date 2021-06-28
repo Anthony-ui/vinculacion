@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ProveedoresService {
   // api="https://localhost:44382/api/proveedores/";
+  
   api="https://apinuevo.azurewebsites.net/api/proveedores/";
   constructor(private http:HttpClient) { }
 

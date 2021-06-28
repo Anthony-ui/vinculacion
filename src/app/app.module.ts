@@ -19,7 +19,9 @@ import { NuevoUsuarioComponent } from './Vistas/Usuarios/nuevo-usuario/nuevo-usu
 import { ListarUsuarioComponent } from './Vistas/Usuarios/listar-usuario/listar-usuario.component';
 import { ListarProductoresComponent } from './Vistas/Productores/listar-productores/listar-productores.component';
 import { NuevoProductoresComponent } from './Vistas/Productores/nuevo-productores/nuevo-productores.component';
-import {CargarScriptsService} from './Servicios/cargar-scripts.service'
+import {CargarScriptsService} from './Servicios/cargar-scripts.service';
+import { ListarDetalleProductosComponent } from './Vistas/detalleProductos/listar-detalle-productos/listar-detalle-productos.component';
+import { NuevoDetalleProductosComponent } from './Vistas/detalleProductos/nuevo-detalle-productos/nuevo-detalle-productos.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {CargarScriptsService} from './Servicios/cargar-scripts.service'
     NuevoUsuarioComponent,
     ListarUsuarioComponent,
     ListarProductoresComponent,
-    NuevoProductoresComponent
+    NuevoProductoresComponent,
+    ListarDetalleProductosComponent,
+    NuevoDetalleProductosComponent
   ],
   imports: [
     BrowserModule,

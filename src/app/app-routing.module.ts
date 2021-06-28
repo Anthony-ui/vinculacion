@@ -1,3 +1,5 @@
+import { NuevoDetalleProductosComponent } from './Vistas/detalleProductos/nuevo-detalle-productos/nuevo-detalle-productos.component';
+import { ListarDetalleProductosComponent } from './Vistas/detalleProductos/listar-detalle-productos/listar-detalle-productos.component';
 import { NuevoProveedorComponent } from './Vistas/Proveedores/nuevo-proveedor/nuevo-proveedor.component';
 import { ListarProveedorComponent } from './Vistas/Proveedores/listar-proveedor/listar-proveedor.component';
 import { NuevoClienteComponent } from './Vistas/Clientes/nuevo-cliente/nuevo-cliente.component';
@@ -32,6 +34,11 @@ const routes: Routes = [
   { path:'listarProveedor', component:ListarProductoresComponent},
   { path:'nuevoProveedor', component:NuevoProductoresComponent},
   { path:'editarProveedor/:id', component:NuevoProductoresComponent},
+
+
+  { path:'listarDetalle', component:ListarDetalleProductosComponent},
+  { path:'nuevoDetalle', component:NuevoDetalleProductosComponent},
+  { path:'editarDetalle/:id', component:NuevoDetalleProductosComponent},
 
 
 

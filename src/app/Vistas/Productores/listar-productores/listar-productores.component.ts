@@ -28,7 +28,7 @@ export class ListarProductoresComponent implements OnInit {
     this.productor.listar().subscribe(res=>{
       this.proveeObj=res;
       this.spinner=0;
-    },error=>{
+    },error=>{    
      alert("Error al conectarse");
      this.spinner=1;
     })    

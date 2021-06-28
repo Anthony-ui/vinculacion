@@ -1,5 +1,10 @@
+import { tipoProductores } from './tipoProductores';
 export interface Categorias
 {
   idCategorias:number,
-  detalle:string
+  nombre:string;
+  descripcion:string;
+  idTipoProductores:number;
+  tipoProductores:tipoProductores
 }
+  

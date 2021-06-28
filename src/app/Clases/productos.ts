@@ -1,26 +1,11 @@
-export interface Productos
-{
+import { Categorias } from './categorias';
+export interface Productos{
   idProductos: number;
-  fechaIngreso: Date;
-  stock: number;
-  precio: number;
-  estado: boolean,
-  proveedoresIdProveedores: number;
-  categoriasIdCategorias: number;
-  nombre: string;
+  nombreProducto: string;
+  unidad: string;
+  descripcion: string;
+  talla: string;
+  idCategorias: number;
+  categorias:Categorias;
+
 }
-/*
-ARTESANOS
-ID
-NOMBREPRODUCTO
-PRECIO ESTIMADO
-STOCK ESTIMADO
-PROVEEDOR ------ SELECT --- ARTESANOS
-TALLAS
-
-GANADEROS
-ID
-NOMBREPRODUCTO ---
-
-
-*/

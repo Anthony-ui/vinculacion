@@ -80,52 +80,52 @@ export class ProductosComponent implements OnInit {
 
   guardar()
   {
-    let dato:Productos ={
-      idProductos: undefined,
-      fechaIngreso: this.NewFecha,
-      stock: this.NewStock,
-      precio: this.NewPrecio,
-      estado: this.NewEstado,
-      proveedoresIdProveedores: parseInt(this.NewProveedor.toString()),
-      categoriasIdCategorias: parseInt(this.NewCategoria.toString()),
-      nombre: this.NewNombre
-    }
-    this.productosService.nuevoProducto(dato).subscribe(res => {
-      this.mostrar();
-    }, error => alert("Error al insertar el registro"));
+    // let dato:Productos ={
+    //   idProductos: undefined,
+    //   // fechaIngreso: this.NewFecha,
+    //   // stock: this.NewStock,
+    //   // precio: this.NewPrecio,
+    //   // estado: this.NewEstado,
+    //   // proveedoresIdProveedores: parseInt(this.NewProveedor.toString()),
+    //   // categoriasIdCategorias: parseInt(this.NewCategoria.toString()),
+    //   // nombre: this.NewNombre
+    // }
+    // this.productosService.nuevoProducto(dato).subscribe(res => {
+    //   this.mostrar();
+    // }, error => alert("Error al insertar el registro"));
     this.limpiarNew();
   }
 
 
   llenarCampos(item:Productos)
   {
-    this.UpdateFecha = this.obtenerFecha(item.fechaIngreso);
-    this.UpdateStock = item.stock;
-    this.UpdatePrecio = item.precio;
-    this.UpdateEstado = item.estado;
-    this.UpdateProveedor = item.proveedoresIdProveedores;
-    this.UpdateCategoria = item.categoriasIdCategorias;
-    this.UpdateNombre = item.nombre;
-    this.IDproducto = item.idProductos;
+    // this.UpdateFecha = this.obtenerFecha(item.fechaIngreso);
+    // this.UpdateStock = item.stock;
+    // this.UpdatePrecio = item.precio;
+    // this.UpdateEstado = item.estado;
+    // this.UpdateProveedor = item.proveedoresIdProveedores;
+    // this.UpdateCategoria = item.categoriasIdCategorias;
+    // this.UpdateNombre = item.nombre;
+    // this.IDproducto = item.idProductos;
   }
 
 
   actualizarProducto()
   {
-    let dato:Productos = {
-      idProductos: this.IDproducto,
-      fechaIngreso: this.UpdateFecha,
-      stock: this.UpdateStock,
-      precio: this.UpdatePrecio,
-      estado: this.UpdateEstado,
-      proveedoresIdProveedores: parseInt(this.UpdateProveedor.toString()),
-      categoriasIdCategorias: parseInt(this.UpdateCategoria.toString()),
-      nombre: this.UpdateNombre
-    }
-    console.log(dato);
-    this.productosService.editarProducto(this.IDproducto,dato).subscribe(res => {
-      this.mostrar();
-    }, error => alert("Error al actualizar el registro"));
+    // let dato:Productos = {
+    //   idProductos: this.IDproducto,
+    //   fechaIngreso: this.UpdateFecha,
+    //   stock: this.UpdateStock,
+    //   precio: this.UpdatePrecio,
+    //   estado: this.UpdateEstado,
+    //   proveedoresIdProveedores: parseInt(this.UpdateProveedor.toString()),
+    //   categoriasIdCategorias: parseInt(this.UpdateCategoria.toString()),
+    //   nombre: this.UpdateNombre
+    // }
+    // console.log(dato);
+    // this.productosService.editarProducto(this.IDproducto,dato).subscribe(res => {
+    //   this.mostrar();
+    // }, error => alert("Error al actualizar el registro"));
   }
 
 
