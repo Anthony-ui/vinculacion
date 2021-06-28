@@ -58,6 +58,11 @@ export class NuevoDetalleProductosComponent implements OnInit {
   guardar(pro:any)
   {
 
+
+
+
+
+
     if(pro.invalid)
     {
 

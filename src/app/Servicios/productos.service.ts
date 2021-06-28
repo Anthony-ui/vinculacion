@@ -10,13 +10,13 @@ import { Proveedores } from '../Clases/proveedores';
 })
 export class ProductosService {
   // apiCategoria="https://localhost:44382/api/categorias/";
-  // apiProducto="https://localhost:44382/api/productos/";
+  apiProducto="https://localhost:44349/api/productos/";
   // apiProveedor="https://localhost:44382/api/proveedores/";
 
 
-  apiCategoria="https://apinuevo.azurewebsites.net/api/categorias/";
-  apiProducto="https://apinuevo.azurewebsites.net/api/productos/";
-  apiProveedor="https://apinuevo.azurewebsites.net/api/proveedores/";
+  //apiCategoria="https://apinuevo.azurewebsites.net/api/categorias/";
+  //apiProducto="https://apinuevo.azurewebsites.net/api/productos/";
+  //apiProveedor="https://apinuevo.azurewebsites.net/api/proveedores/";
 
   constructor(private http:HttpClient) { }
 
@@ -26,20 +26,14 @@ export class ProductosService {
     return this.http.post(this.apiProducto,producto);
   }
 
-  listarCategorias():Observable<Categorias[]>
-  {
-    return this.http.get<Categorias[]>(this.apiCategoria);
-  }
+
 
   listarProductos():Observable<Productos[]>
   {
     return this.http.get<Productos[]>(this.apiProducto);
   }
 
-  listarProveedores():Observable<Proveedores[]>
-  {
-    return this.http.get<Proveedores[]>(this.apiProveedor);
-  }
+
 
   eliminarProducto(idProducto:any)
   {

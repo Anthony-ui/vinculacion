@@ -47,9 +47,14 @@ export class LoginComponent implements OnInit {
 
 
 
-    }, error => alert("Error al iniciar sesion"))
+    }, error =>{
 
-    this.spinner = 1;
+      alert("Error al iniciar sesion");
+
+      this.spinner = 1;
+    })
+
+  
 
   }
 

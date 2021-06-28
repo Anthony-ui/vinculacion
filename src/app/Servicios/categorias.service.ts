@@ -7,21 +7,22 @@ import { Categorias } from '../Clases/categorias';
   providedIn: 'root'
 })
 export class CategoriaService {
-// api="https://localhost:44382/api/categorias/";
-api="https://apinuevo.azurewebsites.net/api/categorias/";
+  api="https://localhost:44349/api/categorias";
+//api="https://apinuevo.azurewebsites.net/api/categorias/";
   constructor(private http:HttpClient) { }
 
-
+/*
   nuevo(categoria:any)
   {
     return this.http.post(this.api,categoria);
   }
+*/
 
   listar():Observable<Categorias[]>
   {
     return this.http.get<Categorias[]>(this.api);
   }
-
+/*
   eliminar(idCliente:any)
   {
     return this.http.delete(this.api + idCliente);
@@ -38,4 +39,5 @@ api="https://apinuevo.azurewebsites.net/api/categorias/";
   editar(idCategoria: number, categoria: Categorias): Observable<Categorias[]> {
     return this.http.put<Categorias[]>(this.api + idCategoria, categoria);
   }
+  */
 }

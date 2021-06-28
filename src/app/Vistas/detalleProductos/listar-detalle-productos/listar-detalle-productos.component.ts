@@ -39,6 +39,10 @@ export class ListarDetalleProductosComponent implements OnInit {
 
       this.detalleCategoriaList = res;
 
+      console.log(this.detalleCategoriaList.length);
+
+  
+
 
 
       this.spinner = 0;

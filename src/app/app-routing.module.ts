@@ -29,12 +29,13 @@ const routes: Routes = [
   { path:'editarUsuario/:id', component:NuevoUsuarioComponent},
 
   { path:'listarCategoria', component:ListarCategoriaComponent},
-  { path:'productos', component:ProductosComponent},
+  
 
   { path:'listarProveedor', component:ListarProductoresComponent},
   { path:'nuevoProveedor', component:NuevoProductoresComponent},
   { path:'editarProveedor/:id', component:NuevoProductoresComponent},
 
+  { path:'productos', component:ProductosComponent},
 
   { path:'listarDetalle', component:ListarDetalleProductosComponent},
   { path:'nuevoDetalle', component:NuevoDetalleProductosComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
 
 
 ]},
+
 {path:'**', pathMatch:'full',redirectTo:'nosotros'},
 {path:'',pathMatch:'full',redirectTo:'nosotros'}
 

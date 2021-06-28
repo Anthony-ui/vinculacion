@@ -41,33 +41,35 @@ import Swal from 'sweetalert2';
   });
   }
 
-  guardar() {
-    // let datoCategoria: Categorias = {
-    //   // detalle: this.NewDetalleCategoria,
-    //   idCategorias: undefined
-    // };
-    // this.categoriaService.nuevo(datoCategoria).subscribe(res => {
-    //   this.mostrar();
-    //   this.NewDetalleCategoria = "";
-    // }, error => alert("Error al insertar el registro"));
+  /*guardar() {
+    let datoCategoria: Categorias = {
+      detalle: this.NewDetalleCategoria,
+      idCategorias: undefined
+    };
+    this.categoriaService.nuevo(datoCategoria).subscribe(res => {
+      this.mostrar();
+      this.NewDetalleCategoria = "";
+    }, error => alert("Error al insertar el registro"));
+  }*/
+
+  cargar(item: Categorias) {
+    this.IDCategoria = item.idCategorias;
+    //this.UpdateDetalleCategoria = item.detalle;
   }
 
-  // cargar(item: Categorias) {
-  //   this.IDCategoria = item.idCategorias;
-  //   this.UpdateDetalleCategoria = item.detalle;
-  // }
+  /*editar() {
+    let datoCategoria: Categorias = {
+      //detalle: this.UpdateDetalleCategoria,
+      idCategorias: this.IDCategoria
+    };
+    this.categoriaService.editar(this.IDCategoria, datoCategoria).subscribe(res => {
+      this.mostrar();
+      this.UpdateDetalleCategoria = "";
+    }, error => alert("Error al insertar el registro"));
+  }*/
 
-  editar() {
-    // let datoCategoria: Categorias = {
-    //   // detalle: this.UpdateDetalleCategoria,
-    //   idCategorias: this.IDCategoria
-    // };
-    // this.categoriaService.editar(this.IDCategoria, datoCategoria).subscribe(res => {
-    //   this.mostrar();
-    //   this.UpdateDetalleCategoria = "";
-    // }, error => alert("Error al insertar el registro"));
-  }
 
+  /*
   eliminar(id: any) {
     Swal.fire({
       title: '¿Esta seguro que desea eliminar?',
@@ -97,6 +99,6 @@ import Swal from 'sweetalert2';
   openModal(content) {
     this.modalService.open(content, { size: 'sm' });
   }
-
+*/
 
 }
